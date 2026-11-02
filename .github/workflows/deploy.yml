@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v7
       - uses: withastro/action@v6
         with:
+          # Avoid restoring content entries for posts removed from the repository.
+          cache: "false"
           node-version: 24
           package-manager: pnpm@9.14.4
           build-cmd: pnpm check && pnpm build
