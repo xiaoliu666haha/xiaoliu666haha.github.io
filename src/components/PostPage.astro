@@ -1,28 +1,25 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getPostUrlBySlug } from "@utils/url-utils";
-import PostCard from "./PostCard.astro";
+import type { Page } from "astro";
 
+interface Props {
+	page: Page<CollectionEntry<"posts">>;
+}
 const { page } = Astro.props;
-
-let delay = 0;
-const interval = 50;
 ---
-<div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
-    {page.data.map((entry: CollectionEntry<"posts">) => (
-        <PostCard
-                entry={entry}
-                title={entry.data.title}
-                tags={entry.data.tags}
-                category={entry.data.category}
-                published={entry.data.published}
-                updated={entry.data.updated}
-                url={getPostUrlBySlug(entry.slug)}
-                image={entry.data.image}
-                description={entry.data.description}
-                draft={entry.data.draft}
-                class:list="onload-animation"
-                style={`animation-delay: calc(var(--content-delay) + ${delay++ * interval}ms);`}
-        ></PostCard>
+<section aria-label="文章列表">
+    <div class="journal-heading"><span>文章</span><span>{page.total} 篇</span></div>
+    {page.data.length === 0 ? (
+        <div class="journal-empty">
+            <h2>这里即将开始记录。</h2>
+            <p>还没有发布文章，写好后再见。</p>
+        </div>
+    ) : page.data.map((entry) => (
+        <article class="journal-post">
+            <time datetime={entry.data.published.toISOString()}>{entry.data.published.toISOString().slice(0, 10)}</time>
+            <h2><a href={getPostUrlBySlug(entry.slug)}>{entry.data.title}</a></h2>
+            {entry.data.description && <p>{entry.data.description}</p>}
+        </article>
     ))}
-</div>
+</section>

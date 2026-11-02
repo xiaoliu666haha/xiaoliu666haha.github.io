@@ -9,6 +9,7 @@ const sortedPostsList = await getSortedPostsList();
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)}>
-    <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte"></ArchivePanel>
+    <h1 class="text-3xl font-medium mb-8">归档</h1>
+    {sortedPostsList.length === 0 ? <div class="journal-empty"><h2>还没有文章</h2><p>发布后，文章会按时间排列在这里。</p></div> : <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte" />}
 </MainGridLayout>
 

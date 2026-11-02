@@ -17,7 +17,9 @@ corepack pnpm preview
 ```
 
 站点资料：src/config.ts。文章：src/content/posts/。
-初始示例文章保留作排版参考，可在其 frontmatter 中设置 draft: true 隐藏。
+模板示例文章已清空。新文章创建在 src/content/posts/；尚无文章时首页与归档会显示空状态。
+
+外观使用单栏文字主题，样式位于 src/styles/minimal.css，共用布局位于 src/layouts/MainGridLayout.astro。
 
 ## 发布
 
