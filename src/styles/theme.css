@@ -1,0 +1,6 @@
+/* Resolve shared Tailwind components before compiling Markdown @apply rules. */
+@import "./main.css";
+@import "./markdown.css";
+@import "./expressive-code.css";
+@import "./scrollbar.css";
+@import "./minimal.css";
